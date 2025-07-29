@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="">
+  <meta name="keywords" content="Arbitrary style transfer, diffusion model, style-adapter">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FAST</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">SEGA: A Stepwise Evolution Paradigm for Content-Aware Layout Generation
+            with Design Prior</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com.hk/citations?user=xfnL2IEAAAAJ&hl=zh-TW">Haoran Wang</a><sup>1</sup>,</span>
+            <span class="author-block">
+                <a href="">Bo Zhao</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="">Jinghui Wang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Hanzhang Wang<sup>3</sup>,
+            </span>
+            <span class="author-block"> 
+              <a href="">Huan Yang</a><sup>4</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Wei Ji</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Hao Liu</a><sup>1</sup>
+            <span class="author-block">
+                <a href="">Xinyan Xiao</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Baidu Inc., China</span>
+            <span class="author-block"><sup>2</sup>Nanjing University, Nanjing, China</span>
+            <span class="author-block"><sup>3</sup>Harbin Institute of Technology, China</span>
+            <span class="author-block"><sup>4</sup>Kuaishou Technology, China <br>ICCV 2025 (Highlight)</span>
+            <!-- <span class="author-block"><sup></sup></span> -->
+          </div>
+
+          <div class="column has-text-centered">
+
+
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
+        free-viewpoint
+        portraits.
+      </h2>
+    </div>
+  </div>
+</section> -->
+
+<!--  video -->
+<!-- <section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/steve.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/chair-tp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/shiba.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/fullbody.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/blueshirt.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-mask">
+          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/mask.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-coffee">
+          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/coffee.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-toby">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/toby2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            In this paper, we study the content-aware layout generation problem, which aims to automatically generate layouts that are harmonious with a given background image. Existing methods usually deal with this task with a single-step reasoning framework. The lack of a feedback-based self-correction mechanism leads to their failure rates significantly increasing when faced with complex element layout planning. To address this challenge, we introduce <b>SEGA</b>, a novel <b>S</b>tepwise <b>E</b>volution Paradigm for Content-Aware Layout <b>G</b>ener<b>A</b>tion. Inspired by the systematic mode of human thinking, SEGA employs a hierarchical reasoning framework with a coarse-to-fine strategy: first, a coarse-level module roughly estimates the layout planning results; then, another refining module is leveraged to perform fine-level reasoning regarding the coarse planning results. Furthermore, we incorporate layout design principles as prior knowledge into the module to enhance its layout planning ability. Moreover, we present a new large-scale poster dataset, namely BIG-Poster with rich meta-information annotation. We conduct extensive experiments and obtain remarkable state-of-the-art performance improvement on multiple benchmark datasets.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+<!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section> -->
+
+<!-- Examplar results. -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item">
+        <img src="static/images/examplar_results/1.PNG" 
+        style="width: 450px; height: 250px; object-fit: cover;"
+        alt="main table"/>
+        <h2 class="subtitle has-text-centered">
+        </h2> 
+      </div>
+      <div class="item">
+        <img src="static/images/examplar_results/2.PNG" 
+        style="width: 450px; height: 250px; object-fit: cover;"
+        alt="cars peace"/>
+        <h2 class="subtitle has-text-centered">
+        </h2>
+      </div>
+      <div class="item">
+        <img src="static/images/examplar_results/3.PNG" 
+        style="width: 450px; height: 250px; object-fit: cover;"
+        alt="bird"/>
+        <h2 class="subtitle has-text-centered">
+       </h2>
+     </div> 
+     <div class="item">
+      <img src="static/images/examplar_results/4.PNG" 
+      style="width: 450px; height: 250px; object-fit: cover;"
+      alt="bird"/>
+      <h2 class="subtitle has-text-centered">
+      </h2>
+     </div>
+      <div class="item">
+        <img src="static/images/examplar_results/5.PNG" 
+        style="width: 550px; height: 320px; object-fit: cover;"
+        alt="bird"/>
+        <h2 class="subtitle has-text-centered">
+      </h2>
+      </div>
+      <!-- <div class="item">
+        <img src="static/images/examplar_results/6.PNG" 
+        style="width: 250px; height: 320px; object-fit: cover;"
+        alt="bird"/>
+        <h2 class="subtitle has-text-centered">
+      </h2> -->
+    <!-- </div> -->
+  </div>
+</div>
+</div>
+</section>
+
+
+<!-- framework -->
+<section class="section">
+  <div class="hero-body">
+      <div class="container is-max-desktop">
+
+          <h1 class="title is-3">Approach: SEGA</h1>
+
+          <img loading="lazy" src="static/images/framework_SEGA.jpg" alt="dog" />
+          <!--                <img loading="lazy" src="static/images/pipeline.png" alt="Wenjie M5" />-->
+
+          <h2>
+              The training pipeline of SEGA includes two stages:
+          </h2>
+          <h2>
+              1) Stage-1: A Coarse-level Estimation (CE) module is trained to predict the layouts from scratch. 
+          </h2>
+          
+          <h2>
+              2) Stage-2: A Fine-level Refinement (FR) module is initialized by weights of CE module, and generate the final 
+              layout based on the results of Stage-1. 
+          <!-- </h2>
+              <h2>
+              3) Quality tuning with curated high-quality annotated data (i.e., ParaImage-Small).
+          </h2> -->
+
+      </div>
+  </div>
+</section>
+
+
+<!-- Dataset: BigPoster-100K -->
+<section class="hero is-small">
+  <div class="hero-body">
+      <div class="container is-max-desktop">
+          <h2 class="title is-3">Dataset: BigPoster-100K</h2>
+          <h2> Our dataset includes a wide range of poster categories in real world scenario such
+            as commercial, event, and product posters.
+          </h2>
+          <img loading="lazy" src="static/images/BIG-Poster_examples.jpg" alt="dog" />
+          
+          <!-- 新增：并排放置的两幅图像（使用 Bulma 网格） -->
+          <div class="columns mt-4"> <!-- columns 容器 -->
+            <div class="column"> <!-- 第一列 -->
+              <p>
+                The hierarchical structure of each poster is preserved.
+              </p>
+              <img loading="lazy" src="static/images/BigPoster-100k/Structure.png" alt="Poster Example 1" 
+                  style="width: 100%; max-height: 300px; object-fit: cover;"/>
+            </div>
+            <div class="column"> <!-- 第二列 -->
+              <p>
+                Category distribution of layout elements.
+              </p>
+              <img loading="lazy" src="static/images/BigPoster-100k/cat_dist.png" alt="Poster Example 2" 
+                  style="width: 100%; max-height: 300px; object-fit: cover;"/>
+            </div>
+          </div>
+          <!-- <h2>
+              (b) Aesthetic images with manual long-term description (ParaImage-
+              Small) are primarily used for quality-tuning in Stage 3.
+          </h2>
+          
+          <h2>
+              The ParaImage-Small can be download from Google Drive(keep stay tuned)
+          </h2> -->
+          
+<!--                <img loading="lazy" src="static/images/pipeline.png" alt="Wenjie M5" />-->
+      </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    
+      
+    <div class="columns is-centered">
+    <div class="content"> 
+    <h2 class="title is-3">Comparison to State-of-the-Art Methods</h2>
+    
+    <h3 class="title is-4">Quantitative Results</h3>
+
+      
+  <div style="text-align: center;">
+  <head>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto; /* 表格整体居中 */
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            line-height: 1.05;
+        }
+        .table-container {
+          text-align: center;    /* 容器内元素居中 */
+          } 
+        th, td {
+            /* 核心：水平+垂直居中 */
+            text-align: center; /* 水平居中 */
+            vertical-align: middle; /* 垂直居中（确保内容在单元格中间） */
+            padding: 8px 6px; /* 增加内边距，避免内容贴边 */
+            border: 1px solid #ddd;
+            min-width: 50px; /* 防止窄列内容挤压 */
+        }
+        /* 顶部双线 */
+        .top-rules th {
+            border-top: 2px solid #333;
+        }
+        /* 中间分隔线 */
+        .mid-rule th {
+            border-top: 1px solid #333;
+        }
+        /* 底部双线 */
+        .bottom-rules td {
+            border-bottom: 2px solid #333;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .italic {
+            font-style: italic;
+        }
+        .caption {
+            text-align: center;
+            font-weight: bold;
+            margin: 15px 0;
+            font-size: 16px;
+        }
+        /* 上下箭头标识 */
+        .downarrow::after {
+            content: " ↓";
+            font-size: 8px;
+        } 
+        .uparrow::after {
+            content: " ↑";
+            font-size: 8px;
+        }
+        /* 确保空单元格也保持边框和居中样式 */
+        td:empty {
+            height: 30px; /* 空单元格最小高度，避免塌陷 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="table-container"></div>
+    <div class="caption">Table.1 Experimental results on the PKU and CGL dataset.</div>
+    
+    <!-- <table> -->
+    <table class="result-table">
+        <!-- 表头部分 -->
+        <thead>
+        <!-- 顶部双线 -->
+        <tr class="top-border">
+            <th rowspan="4">Method</th>
+            <th colspan="6">PKU</th>  
+            <th colspan="6">CGL</th>
+        </tr>
+        <!-- 中间分隔线 -->
+        <!-- <tr class="mid-rule"> -->
+            <th colspan="4">Graphic</th>
+            <th colspan="2">Content</th>
+            <th colspan="4">Graphic</th>
+            <th colspan="2">Content</th>
+        </tr>
+        <!-- <tr class="mid-rule"> -->
+            <th class="italic">Ali ↓</th>
+            <th class="italic">Ove ↓</th>
+            <th class="italic">Und_l ↑</th>
+            <th class="italic">Und_s ↑</th>
+            <th class="italic">Read ↓</th>
+            <th class="italic">Occ ↓</th>
+            <th class="italic">Ali ↓</th>
+            <th class="italic">Ove ↓</th>
+            <th class="italic">Und_l ↑</th>
+            <th class="italic">Und_s ↑</th>
+            <th class="italic">Read ↓</th>
+            <th class="italic">Occ ↓</th>
+        </tr>
+        <thead>
+
+        <!-- 数据行 -->
+        <tbody>
+        <tr>
+            <td class="bold italic">Non-LLM Based</td>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>CGL-GAN (IJCAI, 2022)</td>
+            <td>-</td><td>0.0380</td><td>-</td><td>0.4800</td><td>0.0158</td><td>0.1320</td>
+            <td>-</td><td>0.0470</td><td>-</td><td>0.6500</td><td>0.0213</td><td>0.1400</td>
+        </tr>
+        <tr>
+            <td>LayoutDM (CVPR, 2023)</td>
+            <td>-</td><td>0.1720</td><td>-</td><td>0.4600</td><td>0.0201</td><td>0.1520</td>
+            <td>-</td><td>0.0260</td><td>-</td><td>0.7900</td><td>0.0192</td><td>0.1270</td>
+        </tr>
+        <tr>
+            <td>RALF (CVPR, 2024)</td>
+            <td class="bold">0.0031</td><td>0.0095</td><td>0.9686</td><td>0.8981</td><td class="bold">0.0138</td><td class="bold">0.1243</td>
+            <td>0.0023</td><td>0.0059</td><td>0.9858</td><td>0.9652</td><td class="bold">0.0180</td><td class="bold">0.1263</td>
+        </tr>
+        
+        <tr>
+            <td class="bold italic">LLM Based</td>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>PosterLlama (ECCV, 2024)</td>
+            <td>0.0036</td><td>0.0080</td><td>0.9874</td><td>0.9497</td><td>0.0170</td><td>0.1380</td>
+            <td>0.0022</td><td>0.0042</td><td>0.9823</td><td>0.9463</td><td>0.0294</td><td>0.2453</td>
+        </tr>
+        <tr>
+            <td>SEGA w/o FR 7B</td>
+            <td>0.0037</td><td>0.0052</td><td>0.9873</td><td>0.9471</td><td>0.0150</td><td>0.1336</td>
+            <td>0.0023</td><td>0.0032</td><td>0.9817</td><td>0.9522</td><td>0.0298</td><td>0.2442</td>
+        </tr>
+        <tr>
+            <td>SEGA w/o FR (Ens-2) 7B</td>
+            <td>0.0035</td><td>0.0041</td><td>0.9892</td><td>0.9673</td><td>0.0144</td><td>0.1305</td>
+            <td>0.0021</td><td>0.0024</td><td>0.9879</td><td>0.9657</td><td>0.0296</td><td>0.2438</td>
+        </tr>
+        <tr>
+            <td>SEGA（7B）</td>
+            <td>0.0035</td><td class="bold">0.0033</td><td class="bold">0.9897</td><td class="bold">0.9731</td><td>0.0142</td><td>0.1286</td>
+            <td class="bold">0.0020</td><td class="bold">0.0017</td><td class="bold">0.9913</td><td class="bold">0.9782</td><td>0.0294</td><td>0.2430</td>
+        </tr>
+        <tr>
+            <td>GT</td>
+            <td>0.0036</td><td>0.0009</td><td>0.9950</td><td>0.9444</td><td>0.0119</td><td>0.1185</td>
+            <td>0.0023</td><td>0.0003</td><td>0.9937</td><td>0.9402</td><td>0.0296</td><td>0.2390</td>
+        </tr>
+        
+        <!-- 底部双线 -->
+        <tr class="bottom-rules">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tbody>
+    </table>
+</body>
+
+<head>
+  <meta charset="UTF-8">
+  <style>
+      table {
+          width: 95%;
+          border-collapse: collapse;
+          margin: 0 auto; /* 表格整体居中 */
+          font-family: Arial, sans-serif;
+          font-size: 14px;
+          line-height: 1.06;
+      }
+      .table-container {
+        text-align: center;    /* 容器内元素居中 */
+        } 
+      th, td {
+          /* 核心：水平+垂直居中 */
+          text-align: center; /* 水平居中 */
+          vertical-align: middle; /* 垂直居中（确保内容在单元格中间） */
+          padding: 8px 6px; /* 增加内边距，避免内容贴边 */
+          border: 1px solid #ddd;
+          min-width: 50px; /* 防止窄列内容挤压 */
+      }
+      /* 顶部双线 */
+      .top-rules th {
+          border-top: 2px solid #333;
+      }
+      /* 中间分隔线 */
+      .mid-rule th {
+          border-top: 1px solid #333;
+      }
+      /* 底部双线 */
+      .bottom-rules td {
+          border-bottom: 2px solid #333;
+      }
+      .bold {
+          font-weight: bold;
+      }
+      .italic {
+          font-style: italic;
+      }
+      .caption {
+          text-align: center;
+          font-weight: bold;
+          margin: 15px 0;
+          font-size: 16px;
+      }
+      /* 上下箭头标识 */
+      .downarrow::after {
+          content: " ↓";
+          font-size: 12px;
+      }
+      .uparrow::after {
+          content: " ↑";
+          font-size: 12px;
+      }
+      /* 确保空单元格也保持边框和居中样式 */
+      td:empty {
+          height: 30px; /* 空单元格最小高度，避免塌陷 */
+      }
+  </style>
+</head>
+<body>
+    <div class="table-container">
+      <div class="caption">Table.2 Experimental results on the Crello dataset.</div>
+        <table class="result-table">
+            <!-- 表头部分 -->
+            <thead>
+                <tr class="top-border">
+                    <th rowspan="5">Method</th>
+                    <th colspan="6">Rule-based Metrics</th>
+                    <th colspan="5">Aesthetic Scores</th>
+                    <!-- <th rowspan="3">Time (s)</th> -->
+                </tr>
+                <tr>
+                    <th colspan="3">Graphic</th>
+                    <th colspan="3">Content</th>
+                    <th rowspan="2" class="italic">S<sub>DL</sub> ↑</th>
+                    <th rowspan="2" class="italic">S<sub>QL</sub> ↑</th>
+                    <th rowspan="2" class="italic">S<sub>TV</sub> ↑</th>
+                    <th rowspan="2" class="italic">S<sub>IO</sub> ↑</th>
+                    <th rowspan="2" class="italic">S<sub>Mean</sub> ↑</th>
+                </tr>
+                <tr>
+                    <th class="italic">Ali ↓</th>
+                    <th class="italic">Ove ↓</th>
+                    <th class="italic">Und_l ↑</th>
+                    <th class="italic">Und_s ↑</th>
+                    <th class="italic">Read ↓</th>
+                    <th class="italic">Occ ↓</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!-- 非LLM方法组 -->
+                <tr>
+                    <td class="group-title italic bold">Non-LLM Based</td>
+                    <td></td><td></td><td></td><td></td><td></td><td></td>
+                    <td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td>FlexDM (CVPR, 2023)</td>
+                    <td>0.0122</td>
+                    <td>0.1139</td>
+                    <td>0.6889</td>
+                    <td>0.5034</td>
+                    <td>0.0516</td>
+                    <td>0.4850</td>
+                    <td>4.563</td>
+                    <td>5.126</td>
+                    <td>4.873</td>
+                    <td>5.239</td>
+                    <td>4.950</td>
+                    <!-- <td>2.03</td> -->
+                </tr>
+
+                <!-- LLM方法组 -->
+                <tr>
+                    <td class="group-title italic bold">LLM Based</td>
+                    <td></td><td></td><td></td><td></td><td></td><td></td>
+                    <td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td>PosterLlama (ECCV, 2024)</td>
+                    <td>0.0099</td>
+                    <td>0.0238</td>
+                    <td>0.9204</td>
+                    <td>0.7378</td>
+                    <td>0.0395</td>
+                    <td>0.4041</td>
+                    <td>5.292</td>
+                    <td>5.796</td>
+                    <td>5.263</td>
+                    <td>5.819</td>
+                    <td>5.542</td>
+                    <!-- <td>7.33</td> -->
+                </tr>
+                <tr>
+                    <td>SEGA w/o FR 7B</td>
+                    <td>0.0102</td>
+                    <td>0.0121</td>
+                    <td>0.8206</td>
+                    <td>0.6698</td>
+                    <td>0.0304</td>
+                    <td>0.4002</td>
+                    <td>5.553</td>
+                    <td>6.332</td>
+                    <td>5.693</td>
+                    <td>5.448</td>
+                    <td>5.756</td>
+                    <!-- <td>8.76</td> -->
+                </tr>
+                <tr>
+                    <td>SEGA w/o FR (Ens-2) 7B</td>
+                    <td>0.0100</td>
+                    <td>0.0093</td>
+                    <td>0.8501</td>
+                    <td>0.7202</td>
+                    <td>0.0285</td>
+                    <td>0.3957</td>
+                    <td>5.642</td>
+                    <td>6.418</td>
+                    <td>5.811</td>
+                    <td>5.529</td>
+                    <td>5.850</td>
+                    <!-- <td>8.76*2</td> -->
+                </tr>
+                <tr>
+                    <td>SEGA 7B</td>
+                    <td class="bold">0.0086</td>
+                    <td>0.0040</td>
+                    <td>0.9337</td>
+                    <td>0.8978</td>
+                    <td>0.0282</td>
+                    <td>0.3964</td>
+                    <td>5.792</td>
+                    <td>6.411</td>
+                    <td>5.824</td>
+                    <td>5.708</td>
+                    <td>5.941</td>
+                    <!-- <td>8.76+7.77</td> -->
+                </tr>
+                <tr>
+                    <td>SEGA w/o FR 13B</td>
+                    <td>0.0102</td>
+                    <td>0.0093</td>
+                    <td>0.8485</td>
+                    <td>0.7315</td>
+                    <td>0.0271</td>
+                    <td>0.3948</td>
+                    <td>5.923</td>
+                    <td>6.624</td>
+                    <td>6.253</td>
+                    <td>5.991</td>
+                    <td>6.197</td>
+                    <!-- <td>10.28</td> -->
+                </tr>
+                <tr>
+                    <td>SEGA w/o FR (Ens-2) 13B</td>
+                    <td>0.0097</td>
+                    <td>0.0075</td>
+                    <td>0.8715</td>
+                    <td>0.7715</td>
+                    <td class="bold">0.0260</td>
+                    <td class="bold">0.3874</td>
+                    <td>6.128</td>
+                    <td>6.652</td>
+                    <td>6.058</td>
+                    <td>5.822</td>
+                    <td>6.165</td>
+                    <!-- <td>10.28*2</td> -->
+                </tr>
+                <tr>
+                    <td>SEGA 13B</td>
+                    <td>0.0095</td>
+                    <td class="bold">0.0025</td>
+                    <td class="bold">0.9541</td>
+                    <td class="bold">0.9270</td>
+                    <td class="bold">0.0260</td>
+                    <td>0.3907</td>
+                    <td class="bold">6.149</td>
+                    <td class="bold">6.745</td>
+                    <td class="bold">6.348</td>
+                    <td class="bold">6.038</td>
+                    <td class="bold">6.320</td>
+                    <!-- <td>10.28+10.01</td> -->
+                </tr>
+                <tr class="bottom-border">
+                    <td>GT</td>
+                    <td>0.0100</td>
+                    <td>0.0116</td>
+                    <td>0.9643</td>
+                    <td>0.8187</td>
+                    <td>0.0259</td>
+                    <td>0.3797</td>
+                    <td>6.882</td>
+                    <td>7.543</td>
+                    <td>6.863</td>
+                    <td>6.025</td>
+                    <!-- <td>6.828</td> -->
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
+
+    <h3 class="title is-4">Qualitative Results</h3>
+
+    <div class="caption">Qualitative Results on PKU dataset</div>
+    <img loading="lazy" src="static/images/gen_results/iccv_pku.jpg" alt="dog" />
+
+    <div class="caption">Qualitative Results on CGL dataset</div>
+    <img loading="lazy" src="static/images/gen_results/iccv_cgl.jpg" alt="dog" />
+
+
+
+
+
+    
+
+    <!-- Concurrent Work. -->
+    <!-- <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Links</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            There's a lot of excellent work that was introduced around the same time as ours.
+          </p>
+          <p>
+            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
+          </p>
+          <p>
+            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
+            both use deformation fields to model non-rigid scenes.
+          </p>
+          <p>
+            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
+          </p>
+          <p>
+            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
+          </p>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Concurrent Work. -->
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{wang2025SEGA,
+  author    = {Haoran, Wang and Bo, Zhao and Jinghui, Wang and Hanzhang, Wang and Huan, Yang and Wei, Ji and Hao, Liu and Xinyan, Xiao},
+  title     = {SEGA: A Stepwise Evolution Paradigm for Content-Aware Layout Generation with Design Prior},
+  journal   = {ICCV},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
